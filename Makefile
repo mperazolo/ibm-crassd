@@ -1,10 +1,9 @@
 # Makefile for IBM POWER hardware monitor
 # Copyright (c) 2017 International Business Machines.  All rights reserved.
-JAVAHOME=/etc/alternatives/java_sdk
-JAVAC=$(JAVAHOME)/bin/javac
-JAR=$(JAVAHOME)/bin/jar
-JAVAH=$(JAVAHOME)/bin/javah
-JAVA=$(JAVAHOME)/bin/java
+JAVAC=/usr/bin/javac
+JAR=/usr/bin/jar
+JAVAH=/usr/bin/javah
+JAVA=/usr/bin/java
 CLASSPATH=./classes
 
 # Need to test DESTDIR to see if it is set.  Otherwise set it.
