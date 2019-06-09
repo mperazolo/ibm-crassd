@@ -137,14 +137,10 @@ def notifyLogstash(cerEvent, impactedNode, entityAttr):
          @param entityAttr: dictionary, contains the list of known attributes for the entity to report to
          @return: True if notification was successful, false if it was unable to send the alert
     """
-    
-    newAlert = {'type':'ibm-crasssd-bmc-alerts', 'source': impactedNode, 
-                'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                'data': cerEvent
-             }
+    newAlert = {'type':'ibm-crasssd-bmc-alerts', 'source': impactedNode,
+                'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
     queDict = {}
     queDict['entityAttr'] = entityAttr
-    queDict['logEntry'] = newAlert
+    queDict['logEntry'] = newAlert.update(cerEvent)
     return writeToSocket(config.pluginVars['logstash']['logstashSocket'], queDict)
-    
      

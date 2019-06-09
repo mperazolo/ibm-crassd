@@ -222,6 +222,10 @@ public class ipmiSelParser {
                             "\t\t\"userAction\": \"Ensure the BMC supports IPMI. Ensure the credentials provided are correct.\"" +
                             "\n\t},");
                 }
+                else if(line.contains("|  Pre-Init  |")) {
+                        /* TBD - fix this situation later, for now just skip */
+                        continue;
+                }
                 else if(line.contains("SEL has no entries")){
                     continue;
                 }
