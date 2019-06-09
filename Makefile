@@ -41,20 +41,20 @@ rpm: java jar
 	rpmbuild --define '_topdir $(RPMDIR)' -bb $(RPMDIR)/ibm-crassd-ppc64le.spec
 
 deb: java jar
-        rm -rf $(DEBDIR)
-        mkdir -p $(DEBDIR)
-        for i in bin lib etc; do mkdir -p $(DEBDIR)/opt/ibm/ras/$$i; done
-        for i in system system-preset; do mkdir -p $(DEBDIR)/usr/lib/systemd/$$i; done
-        make install DESTDIR=$(DEBDIR)
-        mkdir -p $(DEBDIR)/DEBIAN
-        cp control $(DEBDIR)/DEBIAN
-        cd $(DEBDIR); find opt -type f -exec md5sum "{}" + >> DEBIAN/md5sums
-        cd $(DEBDIR); find usr -type f -exec md5sum "{}" + >> DEBIAN/md5sums
-        cd $(DEBDIR); echo "/opt/ibm/ras/etc/ibm-crassd.config" >> DEBIAN/conffiles
-        cd $(DEBDIR); echo "/usr/lib/systemd/system/ibm-crassd.service" >> DEBIAN/conffiles
-        cd $(DEBDIR); echo "/usr/lib/systemd/system-preset/85-ibm-crassd.preset" >> DEBIAN/conffiles
-        cd $(DEBDIR); echo "#!/bin/bash" >> DEBIAN/postinst
-        cd $(DEBDIR); echo "systemctl daemon-reload 2> /dev/null || true" >> DEBIAN/postinst
-        chmod +x $(DEBDIR)/DEBIAN/postinst
-        dpkg-deb -b $(DEBDIR) $(DEBDIR)/DEBIAN/ibm-crassd-1.0-ppc64el.deb
+	rm -rf $(DEBDIR)
+	mkdir -p $(DEBDIR)
+	for i in bin lib etc; do mkdir -p $(DEBDIR)/opt/ibm/ras/$$i; done
+	for i in system system-preset; do mkdir -p $(DEBDIR)/usr/lib/systemd/$$i; done
+	make install DESTDIR=$(DEBDIR)
+	mkdir -p $(DEBDIR)/DEBIAN
+	cp control $(DEBDIR)/DEBIAN
+	cd $(DEBDIR); find opt -type f -exec md5sum "{}" + >> DEBIAN/md5sums
+	cd $(DEBDIR); find usr -type f -exec md5sum "{}" + >> DEBIAN/md5sums
+	cd $(DEBDIR); echo "/opt/ibm/ras/etc/ibm-crassd.config" >> DEBIAN/conffiles
+	cd $(DEBDIR); echo "/usr/lib/systemd/system/ibm-crassd.service" >> DEBIAN/conffiles
+	cd $(DEBDIR); echo "/usr/lib/systemd/system-preset/85-ibm-crassd.preset" >> DEBIAN/conffiles
+	cd $(DEBDIR); echo "#!/bin/bash" >> DEBIAN/postinst
+	cd $(DEBDIR); echo "systemctl daemon-reload 2> /dev/null || true" >> DEBIAN/postinst
+	chmod +x $(DEBDIR)/DEBIAN/postinst
+	dpkg-deb -b $(DEBDIR) $(DEBDIR)/DEBIAN/ibm-crassd-1.0-ppc64el.deb
 
