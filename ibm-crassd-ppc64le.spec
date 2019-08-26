@@ -9,10 +9,8 @@ URL         : http://ibm.com
 Summary     : IBM POWER LC Cluster RAS Service Package
 
 Requires: java >= 1.7.0
-Requires: python34
-Requires: python34-requests
+Requires: python3
 Requires: python-configparser
-Requires: python34-websocket-client
 Requires: libstdc++
 Requires: pexpect
 
