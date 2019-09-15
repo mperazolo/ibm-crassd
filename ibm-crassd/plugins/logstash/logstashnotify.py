@@ -138,9 +138,10 @@ def notifyLogstash(cerEvent, impactedNode, entityAttr):
          @return: True if notification was successful, false if it was unable to send the alert
     """
     newAlert = {'type':'ibm-crasssd-bmc-alerts', 'source': impactedNode,
-                'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+                'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                'data': cerEvent}
     queDict = {}
     queDict['entityAttr'] = entityAttr
-    queDict['logEntry'] = newAlert.update(cerEvent)
+    queDict['logEntry'] = newAlert
     return writeToSocket(config.pluginVars['logstash']['logstashSocket'], queDict)
      
